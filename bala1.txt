@@ -1,0 +1,1909 @@
+SQL> drop emp;
+drop emp
+     *
+ERROR at line 1:
+ORA-00950: invalid DROP option 
+
+
+SQL> drop table emp;
+
+Table dropped.
+
+SQL> CREATE TABLE EMP(EMPNO NUMBER(4) NOT NULL,
+  2          ENAME VARCHAR2(10),
+  3          JOB VARCHAR2(9),
+  4          MGR NUMBER(4),
+  5          HIREDATE DATE,
+  6          SAL NUMBER(7, 2),
+  7          COMM NUMBER(7, 2),
+  8          DEPTNO NUMBER(2));
+
+Table created.
+
+SQL> INSERT INTO EMP VALUES
+  2          (7369, 'SMITH',  'CLERK',     7902,
+  3          TO_DATE('17-DEC-1980', 'DD-MON-YYYY'),  800, NULL, 20);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES
+  2          (7499, 'ALLEN',  'SALESMAN',  7698,
+  3          TO_DATE('20-FEB-1981', 'DD-MON-YYYY'), 1600,  300, 30);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES
+  2          (7521, 'WARD',   'SALESMAN',  7698,
+  3          TO_DATE('22-FEB-1981', 'DD-MON-YYYY'), 1250,  500, 30);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES
+  2          (7566, 'JONES',  'MANAGER',   7839,
+  3          TO_DATE('2-APR-1981', 'DD-MON-YYYY'),  2975, NULL, 20);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES
+  2          (7654, 'MARTIN', 'SALESMAN',  7698,
+  3          TO_DATE('28-SEP-1981', 'DD-MON-YYYY'), 1250, 1400, 30);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES
+  2          (7698, 'BLAKE',  'MANAGER',   7839,
+  3          TO_DATE('1-MAY-1981', 'DD-MON-YYYY'),  2850, NULL, 30);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES
+  2          (7782, 'CLARK',  'MANAGER',   7839,
+  3          TO_DATE('9-JUN-1981', 'DD-MON-YYYY'),  2450, NULL, 10);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES
+  2          (7788, 'SCOTT',  'ANALYST',   7566,
+  3          TO_DATE('09-DEC-1982', 'DD-MON-YYYY'), 3000, NULL, 20);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES
+  2          (7839, 'KING',   'PRESIDENT', NULL,
+  3          TO_DATE('17-NOV-1981', 'DD-MON-YYYY'), 5000, NULL, 10);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES
+  2          (7844, 'TURNER', 'SALESMAN',  7698,
+  3          TO_DATE('8-SEP-1981', 'DD-MON-YYYY'),  1500,    0, 30);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES
+  2          (7876, 'ADAMS',  'CLERK',     7788,
+  3          TO_DATE('12-JAN-1983', 'DD-MON-YYYY'), 1100, NULL, 20);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES
+  2          (7900, 'JAMES',  'CLERK',     7698,
+  3          TO_DATE('3-DEC-1981', 'DD-MON-YYYY'),   950, NULL, 30);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES
+  2          (7902, 'FORD',   'ANALYST',   7566,
+  3          TO_DATE('3-DEC-1981', 'DD-MON-YYYY'),  3000, NULL, 20);
+
+1 row created.
+
+SQL> INSERT INTO EMP VALUES
+  2          (7934, 'MILLER', 'CLERK',     7782,
+  3          TO_DATE('23-JAN-1982', 'DD-MON-YYYY'), 1300, NULL, 10);
+
+1 row created.
+
+SQL> DROP TABLE DESIGNATION_MASTER CASCADE CONSTRAINTS;
+DROP TABLE DESIGNATION_MASTER CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> DROP TABLE DESIGNATION_MASTERs CASCADE CONSTRAINTS;
+DROP TABLE DESIGNATION_MASTERs CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> CREATE TABLE Designation_Master(
+  2  Design_Code NUMBER(3) PRIMARY KEY,
+  3  Design_Name VARCHAR2(50) UNIQUE);
+
+Table created.
+
+SQL> INSERT INTO designation_master VALUES(101,'HOD');
+
+1 row created.
+
+SQL> INSERT INTO designation_master VALUES(102,'Professor');
+
+1 row created.
+
+SQL> INSERT INTO designation_master VALUES(103,'Reader');
+
+1 row created.
+
+SQL> INSERT INTO designation_master VALUES(104,'Sr.Lecturer');
+
+1 row created.
+
+SQL> INSERT INTO designation_master VALUES(105,'Lecturer');
+
+1 row created.
+
+SQL> INSERT INTO designation_master VALUES(106,'Director');
+
+1 row created.
+
+SQL> DROP TABLE DEPARTMENT_MASTER CASCADE CONSTRAINTS;
+DROP TABLE DEPARTMENT_MASTER CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> DROP TABLE DEPARTMENT_MASTERs CASCADE CONSTRAINTS;
+DROP TABLE DEPARTMENT_MASTERs CASCADE CONSTRAINTS
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> CREATE TABLE Department_Master(
+  2  Dept_code NUMBER(2) PRIMARY KEY,
+  3  Dept_Name VARCHAR2(50) UNIQUE);
+
+Table created.
+
+SQL> INSERT INTO department_master VALUES(10,'Computer Science');
+
+1 row created.
+
+SQL> INSERT INTO department_master VALUES(20,'Electricals');
+
+1 row created.
+
+SQL> INSERT INTO department_master VALUES(30,'Electronics');
+
+1 row created.
+
+SQL> INSERT INTO department_master VALUES(40,'Mechanics');
+
+1 row created.
+
+SQL> INSERT INTO department_master VALUES(50,'Robotics');
+
+1 row created.
+
+SQL> CREATE TABLE Student_Master(
+  2  Student_Code NUMBER(6) PRIMARY KEY,
+  3  Student_Name VARCHAR2(50) NOT NULL,
+  4  Dept_Code NUMBER(2) REFERENCES Department_Master(dept_code),
+  5  Student_Dob DATE,
+  6  Student_Address VARCHAR2(240));
+
+Table created.
+
+SQL> INSERT INTO student_master VALUES(1001,'Amit',10,'11-Jan-80','chennai');
+
+1 row created.
+
+SQL> INSERT INTO student_master VALUES(1002,'Ravi',10,'1-Nov-81','New Delhi');
+
+1 row created.
+
+SQL> INSERT INTO student_master VALUES(1003,'Ajay',20,'13-Jan-82',null);
+
+1 row created.
+
+SQL> INSERT INTO student_master VALUES(1004,'Raj',30,'14-Jan-79','Mumbai');
+
+1 row created.
+
+SQL> INSERT INTO student_master VALUES(1005,'Arvind',40,'15-Jan-83','Bangalore');
+
+1 row created.
+
+SQL> INSERT INTO student_master VALUES(1006,'Rahul',50,'16-Jan-81','Delhi');
+
+1 row created.
+
+SQL> INSERT INTO student_master VALUES(1007,'Mehul',20,'17-Jan-82','Chennai');
+
+1 row created.
+
+SQL> INSERT INTO student_master VALUES(1008,'Dev',10,'11-Mar-81','Bangalore');
+
+1 row created.
+
+SQL> INSERT INTO student_master VALUES(1009,'Vijay',30,'19-Jan-80','Bangalore');
+
+1 row created.
+
+SQL> INSERT INTO student_master VALUES(1010,'Rajat',40,'20-Jan-80','Bangalore');
+
+1 row created.
+
+SQL> INSERT INTO student_master VALUES(1011,'Sunder',50,'21-Jan-80','Chennai');
+
+1 row created.
+
+SQL> INSERT INTO student_master VALUES(1012,'Rajesh', 30,'22-Jan-80',null);
+
+1 row created.
+
+SQL> INSERT INTO student_master VALUES(1013,'Anil',20,'23-Jan-80','Chennai');
+
+1 row created.
+
+SQL> INSERT INTO student_master VALUES(1014,'Sunil',10,'15-Feb-85',null);
+
+1 row created.
+
+SQL> INSERT INTO student_master VALUES(1015,'Kapil',40,'18-Mar-81','Mumbai');
+
+1 row created.
+
+SQL> INSERT INTO student_master VALUES(1016,'Ashok',40,'26-Nov-80',null);
+
+1 row created.
+
+SQL> INSERT INTO student_master VALUES(1017,'Ramesh',30,'27-Dec-80',null);
+
+1 row created.
+
+SQL> INSERT INTO student_master VALUES(1018,'Amit Raj',50,'28-Sep-80','New Delhi');
+
+1 row created.
+
+SQL> INSERT INTO student_master VALUES(1019,'Ravi Raj',50,'29-May-81','New Delhi');
+
+1 row created.
+
+SQL> INSERT INTO student_master VALUES(1020,'Amrit',10,'11-Nov-80',null);
+
+1 row created.
+
+SQL> INSERT INTO student_master VALUES(1021,'Sumit',20,'1-Jan-80','Chennai');
+
+1 row created.
+
+SQL> CREATE TABLE Student_Marks(
+  2  Student_Code NUMBER (6) REFERENCES student_Master(student_code),
+  3  Student_Year NUMBER not null,
+  4  Subject1 NUMBER (3),
+  5  Subject2 NUMBER (3),
+  6  Subject3 NUMBER (3));
+
+Table created.
+
+SQL> INSERT INTO student_marks VALUES(1001,2010,55,45,78);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1002,2010,66,74,88);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1003,2010,87,54,65);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1004,2010,65,64,90);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1005,2010,78,88,65);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1006,2010,65,86,54);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1007,2010,67,79,49);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1008,2010,72,55,55);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1009,2010,71,59,58);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1010,2010,68,44,92);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1011,2010,89,96,78);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1012,2010,78,56,55);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1013,2010,75,58,65);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1014,2010,73,74,65);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1015,2010,66,45,74);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1016,2010,68,78,74);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1017,2010,69,44,52);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1018,2010,65,78,56);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1019,2010,78,58,74);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1020,2010,45,55,65);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1021,2010,78,79,78);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1001,2011,68,44,92);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1002,2011,89,96,78);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1003,2011,78,56,55);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1004,2011,75,58,65);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1005,2011,73,74,65);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1006,2011,66,45,74);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1007,2011,68,78,74);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1008,2011,69,44,52);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1009,2011,65,78,56);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1010,2011,78,58,74);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1011,2011,45,55,65);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1012,2011,78,79,78);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1013,2011,66,74,88);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1014,2011,65,64,90);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1015,2011,78,88,65);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1016,2011,65,86,54);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1017,2011,67,79,49);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1018,2011,72,55,55);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1019,2011,71,59,58);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1020,2011,55,45,78);
+
+1 row created.
+
+SQL> INSERT INTO student_marks VALUES(1021,2011,87,54,65);
+
+1 row created.
+
+SQL> CREATE TABLE staff_Master(
+  2  Staff_Code number(8) PRIMARY KEY,
+  3  Staff_Name varchar2(50) NOT NULL,
+  4  Design_Code REFERENCES Designation_Master(design_code),
+  5  Dept_Code REFERENCES Department_Master(dept_code),
+  6  Staff_dob DATE,
+  7  Hiredate DATE,
+  8  Mgr_code NUMBER(8),
+  9  Staff_sal NUMBER (10,2),
+ 10  Staff_address VARCHAR2(240));
+
+Table created.
+
+SQL> INSERT INTO staff_master
+  2  VALUES(100001,'Arvind',102,30,'15-Jan-80','15-Jan-03',100006,17000,'Bangalore');
+
+1 row created.
+
+SQL> INSERT INTO staff_master
+  2  VALUES(100002,'Shyam',102,20,'18-Feb-80','17-Feb-02',100007,20000,'Chennai');
+
+1 row created.
+
+SQL> INSERT INTO staff_master
+  2  VALUES(100003,'Mohan',102,10,'23-Mar-80','19-Jan-02',100006,24000,'Mumbai');
+
+1 row created.
+
+SQL> INSERT INTO staff_master
+  2  VALUES(100004,'Anil',102,20,'22-Apr-77','11-Mar-01',100006,20000,'Hyderabad');
+
+1 row created.
+
+SQL> INSERT INTO staff_master
+  2  VALUES(100005,'John',106,10,'22-May-76','21-Jan-01',100007,32000,'Bangalore');
+
+1 row created.
+
+SQL> INSERT INTO staff_master
+  2  VALUES(100006,'Allen',103,30,'22-Jan-80','23-Apr-01',100005,42000,'Chennai');
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> INSERT INTO staff_master
+  2  VALUES(100007,'Smith',103,20,'19-Jul-73','12-Mar-02',100005,62000,'Mumbai');
+
+1 row created.
+
+SQL> INSERT INTO staff_master
+  2  VALUES(100008,'Raviraj',102,40,'17-Jun-80','11-Jan-03',100006,18000,'Bangalore');
+
+1 row created.
+
+SQL> INSERT INTO staff_master
+  2  VALUES(100009,'Rahul',102,20,'16-Jan-78','11-Dec-03',100006,22000,'Hyderabad');
+
+1 row created.
+
+SQL> INSERT INTO staff_master
+  2  VALUES(100010,'Ram',103,30,'17-Jan-79','17-Jan-02',100007,32000,'Bangalore');
+
+1 row created.
+
+SQL> CREATE TABLE Book_Master(
+  2  Book_code NUMBER(10) PRIMARY KEY,
+  3  Book_name VARCHAR2(50) NOT NULL,
+  4  Book_pub_year NUMBER,
+  5  Book_pub_author VARCHAR2 (50) NOT NULL);
+
+Table created.
+
+SQL> 
+SQL> INSERT INTO book_master VALUES(10000001,'Let Us C++',2000,'Yashavant Kanetkar');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO book_master VALUES(10000002,'Mastersing VC++',2005,'P.J Allen');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO book_master VALUES(10000003,'JAVA Complete Reference',2004,'H.Schild');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO book_master VALUES(10000004,'J2EE Complete Reference',2000,'H. Schild');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO book_master VALUES(10000005,'Relational DBMS',2000,'B.C. Desai');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO book_master VALUES(10000006,'Let Us C',2000, 'Yashavant Kanetkar');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO book_master VALUES(10000007,'Intoduction To Algorithams',2001,'Cormen');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO book_master VALUES(10000008,'Computer Networks',2000,'Tanenbaum');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO book_master VALUES(10000009,'Introduction to O/S',2001,'Millan');
+
+1 row created.
+
+SQL> CREATE TABLE Book_transactions(
+  2  Book_code NUMBER(10) REFERENCES Book_Master(Book_code),
+  3  Student_code NUMBER(6) REFERENCES Student_Master(student_code),
+  4  Staff_code number(8) REFERENCES Staff_Master(staff_code),
+  5  Book_issue_Date date not null,
+  6  Book_expected_return_date date not null,
+  7  Book_actual_return_date date);
+
+Table created.
+
+SQL> INSERT INTO book_transactions
+  2  VALUES(10000006,1012,NULL,'02-Feb-2011','09-Feb-2011',NULL);
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO book_transactions
+  2  VALUES(10000008,NULL,100006,'10-Mar-2011','17-Mar-2011','15-Mar-2011');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO book_transactions
+  2  VALUES(10000009,NULL,100010,'01-Apr-2011','08-Apr-2011','10-Apr-2011');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO book_transactions
+  2  VALUES(10000004,1015,NULL,'12-Feb-2011','19-Feb-2011',NULL);
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> INSERT INTO book_transactions
+  2  VALUES(10000005,NULL,100007,'14-Mar-2011','21-Mar-2011','21-Mar-2011');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO book_transactions
+  2  VALUES(10000007,NULL,100007,'01-Apr-2011','07-Apr-2011','06-Apr-2011');
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO book_transactions
+  2  VALUES(10000007,NULL,100006,'01-Apr-2010','07-Apr-2010','06-Apr-2010');
+
+1 row created.
+
+SQL> INSERT INTO book_transactions
+  2  VALUES(10000005,1009,NULL,'31-May-2011','08-JUN-2011','08-JUN-2011');
+
+1 row created.
+
+SQL> select staff_name as EmployeeName,design_code as designationCode from staff_master where hiredate<'01-jan-2003' and staff_sal between 12000 and 25000;
+
+EMPLOYEENAME                                       DESIGNATIONCODE              
+-------------------------------------------------- ---------------              
+Shyam                                                          102              
+Mohan                                                          102              
+Anil                                                           102              
+
+SQL> select staff_code,staff_name,dept_code from staff_master where round(months_between(sysdate,hiredate))>216;
+
+STAFF_CODE STAFF_NAME                                          DEPT_CODE        
+---------- -------------------------------------------------- ----------        
+    100004 Anil                                                       20        
+    100005 John                                                       10        
+    100006 Allen                                                      30        
+
+SQL> select * from staff_master where mgr_code is null;
+
+no rows selected
+
+SQL> select * from book_master where book_pub_year between 2001 and 2004 and book_name like '%&%';
+
+no rows selected
+
+SQL> select staff_name from staff_master where staff_name like '%\_%' escape '\';
+
+no rows selected
+
+SQL> select staff_name, LPAD(staff_sal, 15, '$') staff_sal from staff_master;
+
+STAFF_NAME                                                                      
+--------------------------------------------------                              
+STAFF_SAL                                                                       
+------------------------------------------------------------                    
+Arvind                                                                          
+$$$$$$$$$$17000                                                                 
+                                                                                
+Shyam                                                                           
+$$$$$$$$$$20000                                                                 
+                                                                                
+Mohan                                                                           
+$$$$$$$$$$24000                                                                 
+                                                                                
+
+STAFF_NAME                                                                      
+--------------------------------------------------                              
+STAFF_SAL                                                                       
+------------------------------------------------------------                    
+Anil                                                                            
+$$$$$$$$$$20000                                                                 
+                                                                                
+John                                                                            
+$$$$$$$$$$32000                                                                 
+                                                                                
+Allen                                                                           
+$$$$$$$$$$42000                                                                 
+                                                                                
+
+STAFF_NAME                                                                      
+--------------------------------------------------                              
+STAFF_SAL                                                                       
+------------------------------------------------------------                    
+Smith                                                                           
+$$$$$$$$$$62000                                                                 
+                                                                                
+Raviraj                                                                         
+$$$$$$$$$$18000                                                                 
+                                                                                
+Rahul                                                                           
+$$$$$$$$$$22000                                                                 
+                                                                                
+
+STAFF_NAME                                                                      
+--------------------------------------------------                              
+STAFF_SAL                                                                       
+------------------------------------------------------------                    
+Ram                                                                             
+$$$$$$$$$$32000                                                                 
+                                                                                
+
+10 rows selected.
+
+SQL> SELECT STUDENT_NAME,to_char(student_dob,'MONTH, DD YYYY') as DATEOFBIRTH FROM STUDENT_MASTER where to_char(student_dob,'DAY')
+  2  like '%SUNDAY%' or to_char(student_dob,'DAY') like '%SATURDAY%';
+
+STUDENT_NAME                                                                    
+--------------------------------------------------                              
+DATEOFBIRTH                                                                     
+---------------------------------------------                                   
+Ravi                                                                            
+NOVEMBER , 01 1981                                                              
+                                                                                
+Raj                                                                             
+JANUARY  , 14 1979                                                              
+                                                                                
+Arvind                                                                          
+JANUARY  , 15 1983                                                              
+                                                                                
+
+STUDENT_NAME                                                                    
+--------------------------------------------------                              
+DATEOFBIRTH                                                                     
+---------------------------------------------                                   
+Mehul                                                                           
+JANUARY  , 17 1982                                                              
+                                                                                
+Vijay                                                                           
+JANUARY  , 19 1980                                                              
+                                                                                
+Rajat                                                                           
+JANUARY  , 20 1980                                                              
+                                                                                
+
+STUDENT_NAME                                                                    
+--------------------------------------------------                              
+DATEOFBIRTH                                                                     
+---------------------------------------------                                   
+Ramesh                                                                          
+DECEMBER , 27 1980                                                              
+                                                                                
+Amit Raj                                                                        
+SEPTEMBER, 28 1980                                                              
+                                                                                
+
+8 rows selected.
+
+SQL> SELECT STAFF_NAME,ROUND(MONTHS_BETWEEN(SYSDATE,HIREDATE)) AS MONTHS_WORKED FROM STAFF_MASTER order by months_worked;
+
+STAFF_NAME                                         MONTHS_WORKED                
+-------------------------------------------------- -------------                
+Rahul                                                        187                
+Arvind                                                       198                
+Raviraj                                                      198                
+Smith                                                        208                
+Shyam                                                        209                
+Mohan                                                        210                
+Ram                                                          210                
+Allen                                                        219                
+Anil                                                         220                
+John                                                         222                
+
+10 rows selected.
+
+SQL> SELECT * FROM STAFF_MASTER WHERE TO_CHAR(HIREDATE,'DD') BETWEEN 1 AND 15 AND TO_CHAR(HIREDATE,'MONTH') LIKE '%DECEMBER%' ;
+
+STAFF_CODE STAFF_NAME                                         DESIGN_CODE       
+---------- -------------------------------------------------- -----------       
+ DEPT_CODE STAFF_DOB HIREDATE    MGR_CODE  STAFF_SAL                            
+---------- --------- --------- ---------- ----------                            
+STAFF_ADDRESS                                                                   
+--------------------------------------------------------------------------------
+    100009 Rahul                                                      102       
+        20 16-JAN-78 11-DEC-03     100006      22000                            
+Hyderabad                                                                       
+                                                                                
+
+SQL> SELECT STAFF_NAME,STAFF_SAL, CASE WHEN STAFF_SAL >=50000 THEN 'A'WHEN STAFF_SAL  >25000 AND  STAFF_SAL<50000 THEN 'B' WHEN
+  2  STAFF_SAL  >10000 AND  STAFF_SAL<25000 THEN 'C' ELSE 'D' END as GRADE from STAFF_MASTER;
+
+STAFF_NAME                                          STAFF_SAL G                 
+-------------------------------------------------- ---------- -                 
+Arvind                                                  17000 C                 
+Shyam                                                   20000 C                 
+Mohan                                                   24000 C                 
+Anil                                                    20000 C                 
+John                                                    32000 B                 
+Allen                                                   42000 B                 
+Smith                                                   62000 A                 
+Raviraj                                                 18000 C                 
+Rahul                                                   22000 C                 
+Ram                                                     32000 B                 
+
+10 rows selected.
+
+SQL> SELECT STAFF_NAME,TO_CHAR(HIREDATE,'DD MONTH YYYY') AS HIRE_DATE,TO_CHAR(HIREDATE,'DAY')AS DAY FROM STAFF_MASTER
+  2  ORDER BY (NEXT_DAY(HIREDATE, 'MONDAY') - HIREDATE) DESC;
+
+STAFF_NAME                                                                      
+--------------------------------------------------                              
+HIRE_DATE                                                                       
+--------------------------------------------                                    
+DAY                                                                             
+------------------------------------                                            
+Allen                                                                           
+23 APRIL     2001                                                               
+MONDAY                                                                          
+                                                                                
+Smith                                                                           
+12 MARCH     2002                                                               
+TUESDAY                                                                         
+
+STAFF_NAME                                                                      
+--------------------------------------------------                              
+HIRE_DATE                                                                       
+--------------------------------------------                                    
+DAY                                                                             
+------------------------------------                                            
+                                                                                
+Arvind                                                                          
+15 JANUARY   2003                                                               
+WEDNESDAY                                                                       
+                                                                                
+Rahul                                                                           
+11 DECEMBER  2003                                                               
+
+STAFF_NAME                                                                      
+--------------------------------------------------                              
+HIRE_DATE                                                                       
+--------------------------------------------                                    
+DAY                                                                             
+------------------------------------                                            
+THURSDAY                                                                        
+                                                                                
+Ram                                                                             
+17 JANUARY   2002                                                               
+THURSDAY                                                                        
+                                                                                
+Raviraj                                                                         
+
+STAFF_NAME                                                                      
+--------------------------------------------------                              
+HIRE_DATE                                                                       
+--------------------------------------------                                    
+DAY                                                                             
+------------------------------------                                            
+11 JANUARY   2003                                                               
+SATURDAY                                                                        
+                                                                                
+Mohan                                                                           
+19 JANUARY   2002                                                               
+SATURDAY                                                                        
+                                                                                
+
+STAFF_NAME                                                                      
+--------------------------------------------------                              
+HIRE_DATE                                                                       
+--------------------------------------------                                    
+DAY                                                                             
+------------------------------------                                            
+Anil                                                                            
+11 MARCH     2001                                                               
+SUNDAY                                                                          
+                                                                                
+Shyam                                                                           
+17 FEBRUARY  2002                                                               
+SUNDAY                                                                          
+
+STAFF_NAME                                                                      
+--------------------------------------------------                              
+HIRE_DATE                                                                       
+--------------------------------------------                                    
+DAY                                                                             
+------------------------------------                                            
+                                                                                
+John                                                                            
+21 JANUARY   2001                                                               
+SUNDAY                                                                          
+                                                                                
+
+10 rows selected.
+
+SQL> SELECT INSTR('Mississippi','i',2,3) AS POSITION FROM DUAL;
+
+  POSITION                                                                      
+----------                                                                      
+         8                                                                      
+
+SQL> select to_char(next_day((last_day(sysdate))-7,'Friday'),'DDSPTH "of" MONTH,yyyy') as "Pay Date" from dual;
+
+Pay Date                                                                        
+-----------------------------------------------------------                     
+TWENTY-SIXTH of JULY     ,2019                                                  
+
+SQL> SELECT STUDENT_CODE,STUDENT_NAME,DECODE(DEPT_CODE,20,'ELECTRICALS',30,'ELECTRONICS','OTHERS') AS DEPT_NAME FROM STUDENT_MASTER;
+
+STUDENT_CODE STUDENT_NAME                                       DEPT_NAME       
+------------ -------------------------------------------------- -----------     
+        1001 Amit                                               OTHERS          
+        1002 Ravi                                               OTHERS          
+        1003 Ajay                                               ELECTRICALS     
+        1004 Raj                                                ELECTRONICS     
+        1005 Arvind                                             OTHERS          
+        1006 Rahul                                              OTHERS          
+        1007 Mehul                                              ELECTRICALS     
+        1008 Dev                                                OTHERS          
+        1009 Vijay                                              ELECTRONICS     
+        1010 Rajat                                              OTHERS          
+        1011 Sunder                                             OTHERS          
+
+STUDENT_CODE STUDENT_NAME                                       DEPT_NAME       
+------------ -------------------------------------------------- -----------     
+        1012 Rajesh                                             ELECTRONICS     
+        1013 Anil                                               ELECTRICALS     
+        1014 Sunil                                              OTHERS          
+        1015 Kapil                                              OTHERS          
+        1016 Ashok                                              OTHERS          
+        1017 Ramesh                                             ELECTRONICS     
+        1018 Amit Raj                                           OTHERS          
+        1019 Ravi Raj                                           OTHERS          
+        1020 Amrit                                              OTHERS          
+        1021 Sumit                                              ELECTRICALS     
+
+21 rows selected.
+
+SQL> select max(staff_sal) as Maximum,min(staff_sal) as minimum,sum(staff_sal) as total,round (avg(staff_sal)) as average from staff_master group by dept_code;
+
+   MAXIMUM    MINIMUM      TOTAL    AVERAGE                                     
+---------- ---------- ---------- ----------                                     
+     42000      17000      91000      30333                                     
+     62000      20000     124000      31000                                     
+     18000      18000      18000      18000                                     
+     32000      24000      56000      28000                                     
+
+SQL> select deptno,count(empno) as "Total number of managers" from emp where job='MANAGER' group by deptno;
+
+    DEPTNO Total number of managers                                             
+---------- ------------------------                                             
+        30                        1                                             
+        20                        1                                             
+        10                        1                                             
+
+SQL> select deptno,sum(sal) from emp where job!='MANAGER' group by deptno having sum(sal)>20000;
+
+no rows selected
+
+SQL> select staff_name,d.dept_code,dept_name from staff_master s inner join department_master d on s.dept_code=d.dept_code and staff_sal>20000;
+
+STAFF_NAME                                          DEPT_CODE                   
+-------------------------------------------------- ----------                   
+DEPT_NAME                                                                       
+--------------------------------------------------                              
+Mohan                                                      10                   
+Computer Science                                                                
+                                                                                
+John                                                       10                   
+Computer Science                                                                
+                                                                                
+Allen                                                      30                   
+Electronics                                                                     
+                                                                                
+
+STAFF_NAME                                          DEPT_CODE                   
+-------------------------------------------------- ----------                   
+DEPT_NAME                                                                       
+--------------------------------------------------                              
+Smith                                                      20                   
+Electricals                                                                     
+                                                                                
+Rahul                                                      20                   
+Electricals                                                                     
+                                                                                
+Ram                                                        30                   
+Electronics                                                                     
+                                                                                
+
+6 rows selected.
+
+SQL> select s1.staff_code as staff#,s1.staff_name as staff,s1.mgr_code as mgr#,s2.staff_name as manager,d.dept_name from staff_master s1 , staff_master s2,department_master d where s1.mgr_code=s2.staff_code and s1.dept_code=d.dept_code;
+
+    STAFF# STAFF                                                    MGR#        
+---------- -------------------------------------------------- ----------        
+MANAGER                                                                         
+--------------------------------------------------                              
+DEPT_NAME                                                                       
+--------------------------------------------------                              
+    100007 Smith                                                  100005        
+John                                                                            
+Electricals                                                                     
+                                                                                
+    100006 Allen                                                  100005        
+John                                                                            
+Electronics                                                                     
+
+    STAFF# STAFF                                                    MGR#        
+---------- -------------------------------------------------- ----------        
+MANAGER                                                                         
+--------------------------------------------------                              
+DEPT_NAME                                                                       
+--------------------------------------------------                              
+                                                                                
+    100009 Rahul                                                  100006        
+Allen                                                                           
+Electricals                                                                     
+                                                                                
+    100008 Raviraj                                                100006        
+Allen                                                                           
+
+    STAFF# STAFF                                                    MGR#        
+---------- -------------------------------------------------- ----------        
+MANAGER                                                                         
+--------------------------------------------------                              
+DEPT_NAME                                                                       
+--------------------------------------------------                              
+Mechanics                                                                       
+                                                                                
+    100004 Anil                                                   100006        
+Allen                                                                           
+Electricals                                                                     
+                                                                                
+    100003 Mohan                                                  100006        
+
+    STAFF# STAFF                                                    MGR#        
+---------- -------------------------------------------------- ----------        
+MANAGER                                                                         
+--------------------------------------------------                              
+DEPT_NAME                                                                       
+--------------------------------------------------                              
+Allen                                                                           
+Computer Science                                                                
+                                                                                
+    100001 Arvind                                                 100006        
+Allen                                                                           
+Electronics                                                                     
+                                                                                
+
+    STAFF# STAFF                                                    MGR#        
+---------- -------------------------------------------------- ----------        
+MANAGER                                                                         
+--------------------------------------------------                              
+DEPT_NAME                                                                       
+--------------------------------------------------                              
+    100010 Ram                                                    100007        
+Smith                                                                           
+Electronics                                                                     
+                                                                                
+    100005 John                                                   100007        
+Smith                                                                           
+Computer Science                                                                
+
+    STAFF# STAFF                                                    MGR#        
+---------- -------------------------------------------------- ----------        
+MANAGER                                                                         
+--------------------------------------------------                              
+DEPT_NAME                                                                       
+--------------------------------------------------                              
+                                                                                
+    100002 Shyam                                                  100007        
+Smith                                                                           
+Electricals                                                                     
+                                                                                
+
+10 rows selected.
+
+SQL> select s1.student_code,s1.student_name,b1.book_code,bm.book_name from student_master s1 inner join book_transactions b1 on s1.student_code=b1.student_code inner join book_master bm on bm.book_code=b1.book_code and b1.Book_expected_return_date=sysdate;
+
+no rows selected
+
+SQL> select s1.staff_code,s1.staff_name,d1.dept_name,dm.design_name,b1.book_code,bm.book_name,b1.Book_issue_Date from staff_master s1 inner join department_master d1 on s1.dept_code=d1.dept_code inner join designation_master dm on s1.design_code=dm.design_code inner join book_transactions b1 on s1.staff_code=b1.staff_code inner join book_master bm on bm.book_code=b1.book_code;
+
+STAFF_CODE STAFF_NAME                                                           
+---------- --------------------------------------------------                   
+DEPT_NAME                                                                       
+--------------------------------------------------                              
+DESIGN_NAME                                         BOOK_CODE                   
+-------------------------------------------------- ----------                   
+BOOK_NAME                                          BOOK_ISSU                    
+-------------------------------------------------- ---------                    
+    100007 Smith                                                                
+Electricals                                                                     
+Reader                                               10000005                   
+Relational DBMS                                    14-MAR-11                    
+                                                                                
+
+STAFF_CODE STAFF_NAME                                                           
+---------- --------------------------------------------------                   
+DEPT_NAME                                                                       
+--------------------------------------------------                              
+DESIGN_NAME                                         BOOK_CODE                   
+-------------------------------------------------- ----------                   
+BOOK_NAME                                          BOOK_ISSU                    
+-------------------------------------------------- ---------                    
+    100007 Smith                                                                
+Electricals                                                                     
+Reader                                               10000007                   
+Intoduction To Algorithams                         01-APR-11                    
+                                                                                
+
+STAFF_CODE STAFF_NAME                                                           
+---------- --------------------------------------------------                   
+DEPT_NAME                                                                       
+--------------------------------------------------                              
+DESIGN_NAME                                         BOOK_CODE                   
+-------------------------------------------------- ----------                   
+BOOK_NAME                                          BOOK_ISSU                    
+-------------------------------------------------- ---------                    
+    100006 Allen                                                                
+Electronics                                                                     
+Reader                                               10000007                   
+Intoduction To Algorithams                         01-APR-10                    
+                                                                                
+
+STAFF_CODE STAFF_NAME                                                           
+---------- --------------------------------------------------                   
+DEPT_NAME                                                                       
+--------------------------------------------------                              
+DESIGN_NAME                                         BOOK_CODE                   
+-------------------------------------------------- ----------                   
+BOOK_NAME                                          BOOK_ISSU                    
+-------------------------------------------------- ---------                    
+    100006 Allen                                                                
+Electronics                                                                     
+Reader                                               10000008                   
+Computer Networks                                  10-MAR-11                    
+                                                                                
+
+STAFF_CODE STAFF_NAME                                                           
+---------- --------------------------------------------------                   
+DEPT_NAME                                                                       
+--------------------------------------------------                              
+DESIGN_NAME                                         BOOK_CODE                   
+-------------------------------------------------- ----------                   
+BOOK_NAME                                          BOOK_ISSU                    
+-------------------------------------------------- ---------                    
+    100010 Ram                                                                  
+Electronics                                                                     
+Reader                                               10000009                   
+Introduction to O/S                                01-APR-11                    
+                                                                                
+
+SQL> 	select s1.staff_code,s1.staff_name,dm.design_name,d1.dept_name,bt.book_code,bm.book_name,bm.book_pub_author ,5*(sysdate-book_expected_return_date) AS FINE from staff_master s1 inner join department_master d1 on s1.dept_code=d1.dept_code inner join designation_master dm on s1.design_code=dm.design_code inner join book_transactions bt on s1.staff_code=bt.staff_code inner join book_master bm on bt.book_code=bm.book_code;
+
+STAFF_CODE STAFF_NAME                                                           
+---------- --------------------------------------------------                   
+DESIGN_NAME                                                                     
+--------------------------------------------------                              
+DEPT_NAME                                           BOOK_CODE                   
+-------------------------------------------------- ----------                   
+BOOK_NAME                                                                       
+--------------------------------------------------                              
+BOOK_PUB_AUTHOR                                          FINE                   
+-------------------------------------------------- ----------                   
+    100007 Smith                                                                
+Reader                                                                          
+Electricals                                          10000005                   
+
+STAFF_CODE STAFF_NAME                                                           
+---------- --------------------------------------------------                   
+DESIGN_NAME                                                                     
+--------------------------------------------------                              
+DEPT_NAME                                           BOOK_CODE                   
+-------------------------------------------------- ----------                   
+BOOK_NAME                                                                       
+--------------------------------------------------                              
+BOOK_PUB_AUTHOR                                          FINE                   
+-------------------------------------------------- ----------                   
+Relational DBMS                                                                 
+B.C. Desai                                         15203.4363                   
+                                                                                
+
+STAFF_CODE STAFF_NAME                                                           
+---------- --------------------------------------------------                   
+DESIGN_NAME                                                                     
+--------------------------------------------------                              
+DEPT_NAME                                           BOOK_CODE                   
+-------------------------------------------------- ----------                   
+BOOK_NAME                                                                       
+--------------------------------------------------                              
+BOOK_PUB_AUTHOR                                          FINE                   
+-------------------------------------------------- ----------                   
+    100007 Smith                                                                
+Reader                                                                          
+Electricals                                          10000007                   
+
+STAFF_CODE STAFF_NAME                                                           
+---------- --------------------------------------------------                   
+DESIGN_NAME                                                                     
+--------------------------------------------------                              
+DEPT_NAME                                           BOOK_CODE                   
+-------------------------------------------------- ----------                   
+BOOK_NAME                                                                       
+--------------------------------------------------                              
+BOOK_PUB_AUTHOR                                          FINE                   
+-------------------------------------------------- ----------                   
+Intoduction To Algorithams                                                      
+Cormen                                             15118.4363                   
+                                                                                
+
+STAFF_CODE STAFF_NAME                                                           
+---------- --------------------------------------------------                   
+DESIGN_NAME                                                                     
+--------------------------------------------------                              
+DEPT_NAME                                           BOOK_CODE                   
+-------------------------------------------------- ----------                   
+BOOK_NAME                                                                       
+--------------------------------------------------                              
+BOOK_PUB_AUTHOR                                          FINE                   
+-------------------------------------------------- ----------                   
+    100006 Allen                                                                
+Reader                                                                          
+Electronics                                          10000007                   
+
+STAFF_CODE STAFF_NAME                                                           
+---------- --------------------------------------------------                   
+DESIGN_NAME                                                                     
+--------------------------------------------------                              
+DEPT_NAME                                           BOOK_CODE                   
+-------------------------------------------------- ----------                   
+BOOK_NAME                                                                       
+--------------------------------------------------                              
+BOOK_PUB_AUTHOR                                          FINE                   
+-------------------------------------------------- ----------                   
+Intoduction To Algorithams                                                      
+Cormen                                             16943.4363                   
+                                                                                
+
+STAFF_CODE STAFF_NAME                                                           
+---------- --------------------------------------------------                   
+DESIGN_NAME                                                                     
+--------------------------------------------------                              
+DEPT_NAME                                           BOOK_CODE                   
+-------------------------------------------------- ----------                   
+BOOK_NAME                                                                       
+--------------------------------------------------                              
+BOOK_PUB_AUTHOR                                          FINE                   
+-------------------------------------------------- ----------                   
+    100006 Allen                                                                
+Reader                                                                          
+Electronics                                          10000008                   
+
+STAFF_CODE STAFF_NAME                                                           
+---------- --------------------------------------------------                   
+DESIGN_NAME                                                                     
+--------------------------------------------------                              
+DEPT_NAME                                           BOOK_CODE                   
+-------------------------------------------------- ----------                   
+BOOK_NAME                                                                       
+--------------------------------------------------                              
+BOOK_PUB_AUTHOR                                          FINE                   
+-------------------------------------------------- ----------                   
+Computer Networks                                                               
+Tanenbaum                                          15223.4363                   
+                                                                                
+
+STAFF_CODE STAFF_NAME                                                           
+---------- --------------------------------------------------                   
+DESIGN_NAME                                                                     
+--------------------------------------------------                              
+DEPT_NAME                                           BOOK_CODE                   
+-------------------------------------------------- ----------                   
+BOOK_NAME                                                                       
+--------------------------------------------------                              
+BOOK_PUB_AUTHOR                                          FINE                   
+-------------------------------------------------- ----------                   
+    100010 Ram                                                                  
+Reader                                                                          
+Electronics                                          10000009                   
+
+STAFF_CODE STAFF_NAME                                                           
+---------- --------------------------------------------------                   
+DESIGN_NAME                                                                     
+--------------------------------------------------                              
+DEPT_NAME                                           BOOK_CODE                   
+-------------------------------------------------- ----------                   
+BOOK_NAME                                                                       
+--------------------------------------------------                              
+BOOK_PUB_AUTHOR                                          FINE                   
+-------------------------------------------------- ----------                   
+Introduction to O/S                                                             
+Millan                                             15113.4363                   
+                                                                                
+
+SQL> select staff_code,staff_name,staff_sal from staff_master where staff_sal<(select avg(staff_sal) from staff_master);
+
+STAFF_CODE STAFF_NAME                                          STAFF_SAL        
+---------- -------------------------------------------------- ----------        
+    100001 Arvind                                                  17000        
+    100002 Shyam                                                   20000        
+    100003 Mohan                                                   24000        
+    100004 Anil                                                    20000        
+    100008 Raviraj                                                 18000        
+    100009 Rahul                                                   22000        
+
+6 rows selected.
+
+SQL> SELECT BOOK_PUB_AUTHOR,BOOK_NAME FROM BOOK_MASTER WHERE BOOK_PUB_AUTHOR=(SELECT BOOK_PUB_AUTHOR FROM BOOK_MASTER GROUP BY BOOK_PUB_AUTHOR HAVING COUNT(BOOK_PUB_AUTHOR)>1);
+
+BOOK_PUB_AUTHOR                                                                 
+--------------------------------------------------                              
+BOOK_NAME                                                                       
+--------------------------------------------------                              
+Yashavant Kanetkar                                                              
+Let Us C++                                                                      
+                                                                                
+Yashavant Kanetkar                                                              
+Let Us C                                                                        
+                                                                                
+
+SQL> select staff_code,staff_name,dept_name from staff_master s,department_master d where s.dept_code=d.dept_code and staff_code in (select staff_code from book_transactions group by staff_code having count(staff_code)>=2);
+
+STAFF_CODE STAFF_NAME                                                           
+---------- --------------------------------------------------                   
+DEPT_NAME                                                                       
+--------------------------------------------------                              
+    100006 Allen                                                                
+Electronics                                                                     
+                                                                                
+    100007 Smith                                                                
+Electricals                                                                     
+                                                                                
+
+SQL> select count(student_code ),dept_code from student_master group by dept_code having count(student_code)=(select max(count(student_code)) from student_master group by dept_code);
+
+COUNT(STUDENT_CODE)  DEPT_CODE                                                  
+------------------- ----------                                                  
+                  5         10                                                  
+
+SQL> create table customer(customerid number(5),cust_name varchar2(20),Address1 varchar2(30),Address2 varchar2(30));
+
+Table created.
+
+SQL> Alter table customer rename column cust_name to customername;
+
+Table altered.
+
+SQL> Alter table customer modify customername  varchar2(30) Not Null;
+
+Table altered.
+
+SQL> Alter table customer add Gender varchar2(1);
+
+Table altered.
+
+SQL> Alter table customer add Age Number(3);
+
+Table altered.
+
+SQL> Alter table customer add phoneNo number(10);
+
+Table altered.
+
+SQL> insert into customer values(1000,'Allen','#115 Chicago','#115 Chicago','M',25,7878776);
+
+1 row created.
+
+SQL> insert into customer values(1001,'George','#116 France','#116 France','M',25,434524);
+
+1 row created.
+
+SQL> insert into customer values(1002,'Becker','#114 New York','#114 New York','M',45,431525);
+
+1 row created.
+
+SQL> Alter table customer add constraints Custid_prim PRIMARY KEY (customerid);
+
+Table altered.
+
+SQL> insert into customer values(1002,'John','#114 Chicago','#114 Chicago','M',45,439525);
+insert into customer values(1002,'John','#114 Chicago','#114 Chicago','M',45,439525)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (BALA.CUSTID_PRIM) violated 
+
+
+SQL> Alter table customer drop constraint custId_prim;
+
+Table altered.
+
+SQL> insert into customer values(1002,'Becker','#114 New York','#114 New York','M',45,431525);
+
+1 row created.
+
+SQL> insert into customer values(1003,'Nanapatekar','#115 India','#115 India','M',45,431525);
+
+1 row created.
+
+SQL> Alter table customer add constraints Custid_prim PRIMARY KEY (customerid);
+Alter table customer add constraints Custid_prim PRIMARY KEY (customerid)
+                                     *
+ERROR at line 1:
+ORA-02437: cannot validate (BALA.CUSTID_PRIM) - primary key violated 
+
+
+SQL> alter table customer add salary number(8,2);
+
+Table altered.
+
+SQL> insert into customer values(1002,'Becker','#114 New York','#114 New York','M',45,431525,15000.50);
+
+1 row created.
+
+SQL> insert into customer values(1003,'Nanapatekar','#115 India','#115 India','M',45,431525,20000.50);
+
+1 row created.
+
+SQL> TRUNCATE table customer;
+
+Table truncated.
+
+SQL> Alter table customer add e_mail varchar2(30);
+
+Table altered.
+
+SQL> Alter table customer DROP column e_mail;
+
+Table altered.
+
+SQL> create table Suppliers as (select customerid as suppid,customername as sname,address1 as addr1,address2 as addr2,phoneno as contactno from customer);
+
+Table created.
+
+SQL> create table customermaster(customerid number(5) constraint custid_pk primary key,customername varchar2(30) not null,Address1 varchar2(30) not null,Address2 varchar2(30),Gender varchar2(1),Age number(3),phoneno number(10));
+
+Table created.
+
+SQL> Create table accountmaster(customerid number(5),Accountnumber number(10,2) Constraint acc_pk primary key,accounttype char(3),ledgerbalance number(10,2)    Not Null);
+
+Table created.
+
+SQL> create sequence sequence_acc minvalue 1001 maxvalue 9999 start with 1001 increment by 1 cache 101;
+
+Sequence created.
+
+SQL> alter table Accountmaster ADD constraint cust_acc FOREIGN KEY(customerid) REFERENCES customermaster(customerid);
+
+Table altered.
+
+SQL> insert into customermaster values(1000, 'Allen', '#115 Chicago', '#115 Chicago', 'M', 25, 7878776);
+
+1 row created.
+
+SQL> insert into customermaster values(1001, 'George', '#116 France', '#116 France', 'M', 25, 434524);
+
+1 row created.
+
+SQL> insert into customermaster values(1002, 'Becker', '#114 New York', '#114 New York', 'M', 25, 431525);
+
+1 row created.
+
+SQL> alter table Accountmaster add constraint check_type check(accounttype='NRI' or accounttype='IND');
+
+Table altered.
+
+SQL> alter table Accountmaster add constraint Balance_check check(ledgerbalance > 5000);
+
+Table altered.
+
+SQL> drop table accountmaster;
+
+Table dropped.
+
+SQL> create table accountmaster(customerid number(5),accountnumber number(8,2),accounttype char(3), ledgerbalance number(10,2), CONSTRAINT fk_column FOREIGN KEY(customerid) REFERENCES customer(customerid) ON DELETE CASCADE);
+create table accountmaster(customerid number(5),accountnumber number(8,2),accounttype char(3), ledgerbalance number(10,2), CONSTRAINT fk_column FOREIGN KEY(customerid) REFERENCES customer(customerid) ON DELETE CASCADE)
+                                                                                                                                                                                            *
+ERROR at line 1:
+ORA-02270: no matching unique or primary key for this column-list 
+
+
+SQL> create table accountmaster(customerid number(5),accountnumber number(8,2),accounttype char(3), ledgerbalance number(10,2), CONSTRAINT fk_column FOREIGN KEY(customerid) REFERENCES customer(customerid) ON DELETE CASCADE);
+create table accountmaster(customerid number(5),accountnumber number(8,2),accounttype char(3), ledgerbalance number(10,2), CONSTRAINT fk_column FOREIGN KEY(customerid) REFERENCES customer(customerid) ON DELETE CASCADE)
+                                                                                                                                                                                            *
+ERROR at line 1:
+ORA-02270: no matching unique or primary key for this column-list 
+
+
+SQL> Create table accountdetails as select * from Accountmaster;
+Create table accountdetails as select * from Accountmaster
+                                             *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL> Create table accountmaster(customerid number(5),Accountnumber number(10,2) Constraint acc_pk primary key,accounttype char(3),ledgerbalance number(10,2)    Not Null);
+
+Table created.
+
+SQL> Create table accountdetails as select * from Accountmaster;
+
+Table created.
+
+SQL> CREATE VIEW Acc_view AS select Customerid,Accountnumber,AccountType,ledgerBalance from accountmaster;
+CREATE VIEW Acc_view AS select Customerid,Accountnumber,AccountType,ledgerBalance from accountmaster
+            *
+ERROR at line 1:
+ORA-01031: insufficient privileges 
+
+
+SQL> create sequence sequence_acc minvalue 1001 maxvalue 9999 start with 1001 increment by 1 cache 101;
+create sequence sequence_acc minvalue 1001 maxvalue 9999 start with 1001 increment by 1 cache 101
+                *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> alter table Accountmaster ADD constraint cust_acc FOREIGN KEY(customerid) REFERENCES customermaster(customerid);
+
+Table altered.
+
+SQL> insert into customermaster values(1000, 'Allen', '#115 Chicago', '#115 Chicago', 'M', 25, 7878776);
+insert into customermaster values(1000, 'Allen', '#115 Chicago', '#115 Chicago', 'M', 25, 7878776)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (BALA.CUSTID_PK) violated 
+
+
+SQL> insert into customermaster values(1001, 'George', '#116 France', '#116 France', 'M', 25, 434524);
+insert into customermaster values(1001, 'George', '#116 France', '#116 France', 'M', 25, 434524)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (BALA.CUSTID_PK) violated 
+
+
+SQL> CREATE VIEW Acc_view AS select Customerid,Accountnumber,AccountType,ledgerBalance from accountmaster;
+CREATE VIEW Acc_view AS select Customerid,Accountnumber,AccountType,ledgerBalance from accountmaster
+            *
+ERROR at line 1:
+ORA-01031: insufficient privileges 
+
+
+SQL> CREATE VIEW Acc_view AS SELECT(Customerid,Customername,Accountnumber,AccountType,ledgerBalance)
+  2  from AccountMaster;
+CREATE VIEW Acc_view AS SELECT(Customerid,Customername,Accountnumber,AccountType,ledgerBalance)
+                                         *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> CREATE VIEW Acc_view AS select Customerid,Accountnumber,AccountType,ledgerBalance from accountmaster;
+CREATE VIEW Acc_view AS select Customerid,Accountnumber,AccountType,ledgerBalance from accountmaster
+            *
+ERROR at line 1:
+ORA-01031: insufficient privileges 
+
+
+SQL> CREATE VIEW vAccs_Dtls AS SELECT Accounttype,ledgerbalance from Accountmaster where accounttype = 'IND' and ledgerbalance < 10000;
+CREATE VIEW vAccs_Dtls AS SELECT Accounttype,ledgerbalance from Accountmaster where accounttype = 'IND' and ledgerbalance < 10000
+            *
+ERROR at line 1:
+ORA-01031: insufficient privileges 
+
+
+SQL> alter table Accountmaster add constraint check_type check(accounttype='NRI' or accounttype='IND');
+
+Table altered.
+
+SQL> alter table Accountmaster add constraint Balance_check check(ledgerbalance > 5000);
+
+Table altered.
+
+SQL> create table accountmaster(customerid number(5),accountnumber number(8,2),accounttype char(3), ledgerbalance number(10,2), CONSTRAINT fk_column FOREIGN KEY(customerid) REFERENCES customer(customerid) ON DELETE CASCADE);
+create table accountmaster(customerid number(5),accountnumber number(8,2),accounttype char(3), ledgerbalance number(10,2), CONSTRAINT fk_column FOREIGN KEY(customerid) REFERENCES customer(customerid) ON DELETE CASCADE)
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> Create table accountdetails as select * from Accountmaster;
+Create table accountdetails as select * from Accountmaster
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> CREATE VIEW Acc_view AS select Customerid,Accountnumber,AccountType,ledgerBalance from accountmaster;
+CREATE VIEW Acc_view AS select Customerid,Accountnumber,AccountType,ledgerBalance from accountmaster
+            *
+ERROR at line 1:
+ORA-01031: insufficient privileges 
+
+
+SQL> CREATE VIEW Acc_view AS SELECT(Customerid,Customername,Accountnumber,AccountType,ledgerBalance) from AccountMaster;
+CREATE VIEW Acc_view AS SELECT(Customerid,Customername,Accountnumber,AccountType,ledgerBalance) from AccountMaster
+                                         *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> CREATE VIEW vAccs_Dtls AS SELECT Accounttype,ledgerbalance from Accountmaster where accounttype = 'IND' and ledgerbalance < 10000;
+CREATE VIEW vAccs_Dtls AS SELECT Accounttype,ledgerbalance from Accountmaster where accounttype = 'IND' and ledgerbalance < 10000
+            *
+ERROR at line 1:
+ORA-01031: insufficient privileges 
+
+
+SQL> create view accsvw10 as select * from accountmaster;
+create view accsvw10 as select * from accountmaster
+            *
+ERROR at line 1:
+ORA-01031: insufficient privileges 
+
+
+SQL> CREATE sequence SEQ_DEPT minvalue 40 MAXVALUE 200 start with 40 increment by 10 cache 40;
+
+Sequence created.
+
+SQL> insert into department_master values(seq_dept.NEXTVAL,'Communications');
+insert into department_master values(seq_dept.NEXTVAL,'Communications')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (BALA.SYS_C007091) violated 
+
+
+SQL>    insert into department_master values(seq_dept.NEXTVAL,'Petroleum');
+   insert into department_master values(seq_dept.NEXTVAL,'Petroleum')
+*
+ERROR at line 1:
+ORA-00001: unique constraint (BALA.SYS_C007091) violated 
+
+
+SQL>   insert into department_master values(seq_dept.NEXTVAL,'Fabrics');
+
+1 row created.
+
+SQL> insert into department_master values(seq_dept.NEXTVAL,'Petroleum');
+
+1 row created.
+
+SQL> insert into department_master values(seq_dept.NEXTVAL,'Communications');
+
+1 row created.
+
+SQL> DROP sequence seq_dept;
+
+Sequence dropped.
+
+SQL> CREATE INDEX no_name on emp(empno);
+
+Index created.
+
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7369 SMITH      CLERK           7902 17-DEC-80        800                 
+        20                                                                      
+                                                                                
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300      
+        30                                                                      
+                                                                                
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500      
+        30                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7566 JONES      MANAGER         7839 02-APR-81       2975                 
+        20                                                                      
+                                                                                
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400      
+        30                                                                      
+                                                                                
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                 
+        30                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                 
+        10                                                                      
+                                                                                
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3000                 
+        20                                                                      
+                                                                                
+      7839 KING       PRESIDENT            17-NOV-81       5000                 
+        10                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0      
+        30                                                                      
+                                                                                
+      7876 ADAMS      CLERK           7788 12-JAN-83       1100                 
+        20                                                                      
+                                                                                
+      7900 JAMES      CLERK           7698 03-DEC-81        950                 
+        30                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                 
+        20                                                                      
+                                                                                
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                 
+        10                                                                      
+                                                                                
+
+14 rows selected.
+
+SQL> create SYNONYM synemp for emp;
+create SYNONYM synemp for emp
+*
+ERROR at line 1:
+ORA-01031: insufficient privileges 
+
+
+SQL> select * from synemp;
+select * from synemp
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> CREATE INDEX IDX_EMP_HIREDATE on emp(HIREDATE);
+
+Index created.
+
+SQL> CREATE sequence SEQ_EMP minvalue 1001 start with 1001 increment by 1 cache 1001;
+
+Sequence created.
+
+SQL> Create table employee as select * from emp;
+
+Table created.
+
+SQL> desc employee;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(4)
+ ENAME                                              VARCHAR2(10)
+ JOB                                                VARCHAR2(9)
+ MGR                                                NUMBER(4)
+ HIREDATE                                           DATE
+ SAL                                                NUMBER(7,2)
+ COMM                                               NUMBER(7,2)
+ DEPTNO                                             NUMBER(2)
+
+SQL> select * from employee;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7369 SMITH      CLERK           7902 17-DEC-80        800                 
+        20                                                                      
+                                                                                
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300      
+        30                                                                      
+                                                                                
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500      
+        30                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7566 JONES      MANAGER         7839 02-APR-81       2975                 
+        20                                                                      
+                                                                                
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400      
+        30                                                                      
+                                                                                
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                 
+        30                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                 
+        10                                                                      
+                                                                                
+      7788 SCOTT      ANALYST         7566 09-DEC-82       3000                 
+        20                                                                      
+                                                                                
+      7839 KING       PRESIDENT            17-NOV-81       5000                 
+        10                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0      
+        30                                                                      
+                                                                                
+      7876 ADAMS      CLERK           7788 12-JAN-83       1100                 
+        20                                                                      
+                                                                                
+      7900 JAMES      CLERK           7698 03-DEC-81        950                 
+        30                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                 
+        20                                                                      
+                                                                                
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                 
+        10                                                                      
+                                                                                
+
+14 rows selected.
+
+SQL> update employee set job=(select job from employee where empno=7788),deptno=(select deptno from employee where empno=7788) where empno=7698;
+
+1 row updated.
+
+SQL> delete from department where dept_name='SALES';
+delete from department where dept_name='SALES'
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> update employee set empno=7788 where empno=7698;
+
+1 row updated.
+
+SQL> insert into emp (empno,ename,job,mgr,hiredate,sal,comm,deptno) values (1000,'Allen', 'Clerk',1001,'12-jan-01', 3000, 2,10);
+
+1 row created.
+
+SQL> insert into emp (empno,ename,job,mgr,hiredate,sal,comm,deptno) values (1001,'George', 'Analyst',null,'08-sep-1992', 5000, 0,10);
+
+1 row created.
+
+SQL> insert into emp (empno,ename,job,mgr,hiredate,sal,comm,deptno) values (1002,'Becker', 'Manager',1000,'04-nov-1992', 2800, 4,20);
+
+1 row created.
+
+SQL> insert into emp (empno,ename,job,mgr,hiredate,sal,comm,deptno) values (1003,'Bill','Clerk',1002,'04-nov-1992', 3000,0,20);
+
+1 row created.
+
+SQL> insert into customermaster (customerid,customername,address1,address2,gender,age,phoneno,salary) values ( 6000, 'John','#115 Chicago','#115 Chicago','M',25,7878776,10000);
+insert into customermaster (customerid,customername,address1,address2,gender,age,phoneno,salary) values ( 6000, 'John','#115 Chicago','#115 Chicago','M',25,7878776,10000)
+                                                                                         *
+ERROR at line 1:
+ORA-00904: "SALARY": invalid identifier 
+
+
+SQL> insert into customermaster (customerid,customername,address1,address2,gender,age,phoneno,salary) values ( 6001, 'Jack','#116 France','#116 France','M',25,434524,20000);
+insert into customermaster (customerid,customername,address1,address2,gender,age,phoneno,salary) values ( 6001, 'Jack','#116 France','#116 France','M',25,434524,20000)
+                                                                                         *
+ERROR at line 1:
+ORA-00904: "SALARY": invalid identifier 
+
+
+SQL> insert into customermaster (customerid,customername,address1,address2,gender,age,phoneno,salary) values ( 6002, 'James','#114 New York','#114 New York','M',45,431525,15000.50);
+insert into customermaster (customerid,customername,address1,address2,gender,age,phoneno,salary) values ( 6002, 'James','#114 New York','#114 New York','M',45,431525,15000.50)
+                                                                                         *
+ERROR at line 1:
+ORA-00904: "SALARY": invalid identifier 
+
+
+SQL> savepoint sp1;
+
+Savepoint created.
+
+SQL> insert into customermaster (customerid,customername,address1,address2,gender,age,phoneno,salary) values (6003, 'John','#114 Chicago','#114 Chicago','M',45,439525,19000.60);
+insert into customermaster (customerid,customername,address1,address2,gender,age,phoneno,salary) values (6003, 'John','#114 Chicago','#114 Chicago','M',45,439525,19000.60)
+                                                                                         *
+ERROR at line 1:
+ORA-00904: "SALARY": invalid identifier 
+
+
+SQL> rollback to sp1;
+
+Rollback complete.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;
